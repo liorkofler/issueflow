@@ -1,15 +1,20 @@
 /Users/liorsfolder/issueflow_AT&T/issueflow/src/main/java/com/att/tdp/issueflow/IssueFlowApplication.java
+/Users/liorsfolder/issueflow_AT&T/issueflow/src/main/java/com/att/tdp/issueflow/audit/AuditService.java
 /Users/liorsfolder/issueflow_AT&T/issueflow/src/main/java/com/att/tdp/issueflow/controller/AuthController.java
 /Users/liorsfolder/issueflow_AT&T/issueflow/src/main/java/com/att/tdp/issueflow/controller/ProjectController.java
+/Users/liorsfolder/issueflow_AT&T/issueflow/src/main/java/com/att/tdp/issueflow/controller/TicketController.java
 /Users/liorsfolder/issueflow_AT&T/issueflow/src/main/java/com/att/tdp/issueflow/controller/UserController.java
 /Users/liorsfolder/issueflow_AT&T/issueflow/src/main/java/com/att/tdp/issueflow/dto/request/CreateProjectRequest.java
+/Users/liorsfolder/issueflow_AT&T/issueflow/src/main/java/com/att/tdp/issueflow/dto/request/CreateTicketRequest.java
 /Users/liorsfolder/issueflow_AT&T/issueflow/src/main/java/com/att/tdp/issueflow/dto/request/CreateUserRequest.java
 /Users/liorsfolder/issueflow_AT&T/issueflow/src/main/java/com/att/tdp/issueflow/dto/request/LoginRequest.java
 /Users/liorsfolder/issueflow_AT&T/issueflow/src/main/java/com/att/tdp/issueflow/dto/request/UpdateProjectRequest.java
+/Users/liorsfolder/issueflow_AT&T/issueflow/src/main/java/com/att/tdp/issueflow/dto/request/UpdateTicketRequest.java
 /Users/liorsfolder/issueflow_AT&T/issueflow/src/main/java/com/att/tdp/issueflow/dto/request/UpdateUserRequest.java
 /Users/liorsfolder/issueflow_AT&T/issueflow/src/main/java/com/att/tdp/issueflow/dto/response/AuthResponse.java
 /Users/liorsfolder/issueflow_AT&T/issueflow/src/main/java/com/att/tdp/issueflow/dto/response/ErrorResponse.java
 /Users/liorsfolder/issueflow_AT&T/issueflow/src/main/java/com/att/tdp/issueflow/dto/response/ProjectResponse.java
+/Users/liorsfolder/issueflow_AT&T/issueflow/src/main/java/com/att/tdp/issueflow/dto/response/TicketResponse.java
 /Users/liorsfolder/issueflow_AT&T/issueflow/src/main/java/com/att/tdp/issueflow/dto/response/UserResponse.java
 /Users/liorsfolder/issueflow_AT&T/issueflow/src/main/java/com/att/tdp/issueflow/entity/Attachment.java
 /Users/liorsfolder/issueflow_AT&T/issueflow/src/main/java/com/att/tdp/issueflow/entity/AuditActorType.java
@@ -30,7 +35,9 @@
 /Users/liorsfolder/issueflow_AT&T/issueflow/src/main/java/com/att/tdp/issueflow/exception/GlobalExceptionHandler.java
 /Users/liorsfolder/issueflow_AT&T/issueflow/src/main/java/com/att/tdp/issueflow/exception/ResourceNotFoundException.java
 /Users/liorsfolder/issueflow_AT&T/issueflow/src/main/java/com/att/tdp/issueflow/exception/ValidationException.java
+/Users/liorsfolder/issueflow_AT&T/issueflow/src/main/java/com/att/tdp/issueflow/repository/AuditLogRepository.java
 /Users/liorsfolder/issueflow_AT&T/issueflow/src/main/java/com/att/tdp/issueflow/repository/ProjectRepository.java
+/Users/liorsfolder/issueflow_AT&T/issueflow/src/main/java/com/att/tdp/issueflow/repository/TicketRepository.java
 /Users/liorsfolder/issueflow_AT&T/issueflow/src/main/java/com/att/tdp/issueflow/repository/TokenBlacklistRepository.java
 /Users/liorsfolder/issueflow_AT&T/issueflow/src/main/java/com/att/tdp/issueflow/repository/UserRepository.java
 /Users/liorsfolder/issueflow_AT&T/issueflow/src/main/java/com/att/tdp/issueflow/security/CustomUserDetailsService.java
@@ -38,4 +45,5 @@
 /Users/liorsfolder/issueflow_AT&T/issueflow/src/main/java/com/att/tdp/issueflow/security/JwtUtil.java
 /Users/liorsfolder/issueflow_AT&T/issueflow/src/main/java/com/att/tdp/issueflow/security/SecurityConfig.java
 /Users/liorsfolder/issueflow_AT&T/issueflow/src/main/java/com/att/tdp/issueflow/service/ProjectService.java
+/Users/liorsfolder/issueflow_AT&T/issueflow/src/main/java/com/att/tdp/issueflow/service/TicketService.java
 /Users/liorsfolder/issueflow_AT&T/issueflow/src/main/java/com/att/tdp/issueflow/service/UserService.java
