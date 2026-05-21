@@ -2,7 +2,9 @@ package com.att.tdp.issueflow.controller;
 
 import com.att.tdp.issueflow.dto.request.CreateTicketRequest;
 import com.att.tdp.issueflow.dto.request.UpdateTicketRequest;
+import com.att.tdp.issueflow.dto.response.ImportResultResponse;
 import com.att.tdp.issueflow.dto.response.TicketResponse;
+import com.att.tdp.issueflow.service.TicketExportImportService;
 import com.att.tdp.issueflow.service.TicketService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -19,13 +22,31 @@ import java.util.List;
 public class TicketController {
 
     private final TicketService ticketService;
+    private final TicketExportImportService ticketExportImportService;
 
     @GetMapping
     public ResponseEntity<List<TicketResponse>> getAllByProject(@RequestParam Long projectId) {
         return ResponseEntity.ok(ticketService.getAllByProject(projectId));
     }
 
-    // Must be declared before /{ticketId} to avoid Spring treating "deleted" as a path variable
+    // Must be declared before /{ticketId} to avoid Spring treating "export"/"deleted" as path variables
+    @GetMapping("/export")
+    public ResponseEntity<byte[]> exportTickets(@RequestParam Long projectId) {
+        byte[] csv = ticketExportImportService.exportToCSV(projectId);
+        return ResponseEntity.ok()
+                .header("Content-Type", "text/csv")
+                .header("Content-Disposition", "attachment; filename=tickets.csv")
+                .body(csv);
+    }
+
+    @PostMapping("/import")
+    public ResponseEntity<ImportResultResponse> importTickets(
+            @RequestParam("file") MultipartFile file,
+            @RequestParam Long projectId,
+            @AuthenticationPrincipal UserDetails userDetails) {
+        return ResponseEntity.ok(ticketExportImportService.importFromCSV(file, projectId, userDetails.getUsername()));
+    }
+
     @GetMapping("/deleted")
     public ResponseEntity<List<TicketResponse>> getDeletedTickets(
             @RequestParam Long projectId,
