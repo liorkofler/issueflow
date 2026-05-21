@@ -1,3 +1,4 @@
 com/att/tdp/issueflow/service/UserServiceTest.class
 com/att/tdp/issueflow/service/ProjectServiceTest.class
+com/att/tdp/issueflow/service/CommentServiceTest.class
 com/att/tdp/issueflow/service/TicketServiceTest.class

@@ -2,7 +2,9 @@ package com.att.tdp.issueflow.controller;
 
 import com.att.tdp.issueflow.dto.request.CreateUserRequest;
 import com.att.tdp.issueflow.dto.request.UpdateUserRequest;
+import com.att.tdp.issueflow.dto.response.MentionsPageResponse;
 import com.att.tdp.issueflow.dto.response.UserResponse;
+import com.att.tdp.issueflow.service.CommentService;
 import com.att.tdp.issueflow.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +19,7 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
+    private final CommentService commentService;
 
     @GetMapping
     public ResponseEntity<List<UserResponse>> getAllUsers() {
@@ -43,5 +46,13 @@ public class UserController {
     public ResponseEntity<Void> deleteUser(@PathVariable Long userId) {
         userService.deleteUser(userId);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/{userId}/mentions")
+    public ResponseEntity<MentionsPageResponse> getMentions(
+            @PathVariable Long userId,
+            @RequestParam(defaultValue = "1") int page,
+            @RequestParam(defaultValue = "20") int pageSize) {
+        return ResponseEntity.ok(commentService.getMentionsForUser(userId, page, pageSize));
     }
 }
