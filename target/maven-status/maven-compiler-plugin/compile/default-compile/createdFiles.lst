@@ -4,6 +4,7 @@ com/att/tdp/issueflow/exception/ConflictException.class
 com/att/tdp/issueflow/service/TicketService.class
 com/att/tdp/issueflow/security/CustomUserDetailsService.class
 com/att/tdp/issueflow/entity/AuditActorType.class
+com/att/tdp/issueflow/service/TicketDependencyService.class
 com/att/tdp/issueflow/dto/response/UserResponse.class
 com/att/tdp/issueflow/entity/TicketDependency.class
 com/att/tdp/issueflow/entity/TokenBlacklist.class
@@ -27,6 +28,7 @@ com/att/tdp/issueflow/entity/Ticket.class
 com/att/tdp/issueflow/entity/TicketStatus.class
 com/att/tdp/issueflow/repository/TicketRepository.class
 com/att/tdp/issueflow/dto/request/UpdateProjectRequest.class
+com/att/tdp/issueflow/dto/request/AddDependencyRequest.class
 com/att/tdp/issueflow/repository/UserRepository.class
 com/att/tdp/issueflow/dto/request/LoginRequest.class
 com/att/tdp/issueflow/dto/request/UpdateCommentRequest.class
@@ -43,9 +45,11 @@ com/att/tdp/issueflow/dto/request/AddCommentRequest.class
 com/att/tdp/issueflow/entity/User.class
 com/att/tdp/issueflow/service/CommentService.class
 com/att/tdp/issueflow/dto/response/ErrorResponse.class
+com/att/tdp/issueflow/controller/AuditLogController.class
 com/att/tdp/issueflow/dto/response/MentionedUserDto.class
 com/att/tdp/issueflow/service/ProjectService.class
 com/att/tdp/issueflow/entity/Attachment$AttachmentBuilder.class
+com/att/tdp/issueflow/dto/response/DependencyResponse.class
 com/att/tdp/issueflow/audit/AuditService.class
 com/att/tdp/issueflow/entity/CommentMention.class
 com/att/tdp/issueflow/repository/TokenBlacklistRepository.class
@@ -54,9 +58,11 @@ com/att/tdp/issueflow/entity/Comment$CommentBuilder.class
 com/att/tdp/issueflow/entity/TokenBlacklist$TokenBlacklistBuilder.class
 com/att/tdp/issueflow/controller/TicketController.class
 com/att/tdp/issueflow/controller/CommentController.class
+com/att/tdp/issueflow/repository/TicketDependencyRepository.class
 com/att/tdp/issueflow/dto/request/UpdateUserRequest.class
 com/att/tdp/issueflow/entity/Project.class
 com/att/tdp/issueflow/entity/TicketType.class
+com/att/tdp/issueflow/controller/TicketDependencyController.class
 com/att/tdp/issueflow/dto/response/ProjectResponse.class
 com/att/tdp/issueflow/repository/AuditLogRepository.class
 com/att/tdp/issueflow/security/JwtAuthenticationFilter.class
@@ -65,4 +71,5 @@ com/att/tdp/issueflow/entity/Project$ProjectBuilder.class
 com/att/tdp/issueflow/entity/TicketPriority.class
 com/att/tdp/issueflow/repository/CommentRepository.class
 com/att/tdp/issueflow/exception/GlobalExceptionHandler.class
+com/att/tdp/issueflow/dto/response/AuditLogResponse.class
 com/att/tdp/issueflow/service/UserService.class

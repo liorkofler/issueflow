@@ -10,8 +10,10 @@ import com.att.tdp.issueflow.exception.ForbiddenException;
 import com.att.tdp.issueflow.exception.ResourceNotFoundException;
 import com.att.tdp.issueflow.exception.ValidationException;
 import com.att.tdp.issueflow.repository.ProjectRepository;
+import com.att.tdp.issueflow.repository.TicketDependencyRepository;
 import com.att.tdp.issueflow.repository.TicketRepository;
 import com.att.tdp.issueflow.repository.UserRepository;
+import com.att.tdp.issueflow.entity.TicketDependency;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -34,6 +36,7 @@ class TicketServiceTest {
     @Mock private ProjectRepository projectRepository;
     @Mock private UserRepository userRepository;
     @Mock private AuditService auditService;
+    @Mock private TicketDependencyRepository ticketDependencyRepository;
 
     @InjectMocks
     private TicketService ticketService;
@@ -101,6 +104,7 @@ class TicketServiceTest {
     void updateTicket_validTransition_IN_REVIEW_to_DONE() {
         Ticket t = ticket(TicketStatus.IN_REVIEW);
         when(ticketRepository.findByIdAndDeletedAtIsNull(100L)).thenReturn(Optional.of(t));
+        when(ticketDependencyRepository.findByTicketId(100L)).thenReturn(List.of()); // no blockers
         when(ticketRepository.save(any())).thenReturn(t);
         when(userRepository.findByUsername("admin")).thenReturn(Optional.of(admin()));
 
@@ -320,6 +324,46 @@ class TicketServiceTest {
 
         assertThatThrownBy(() -> ticketService.restoreTicket(100L, "admin"))
                 .isInstanceOf(ResourceNotFoundException.class);
+
+        verify(ticketRepository, never()).save(any());
+    }
+
+    // ────────────── Blocker check on DONE transition ──────────────
+
+    @Test
+    void updateTicket_toDONE_withAllBlockersDone_succeeds() {
+        Ticket t = ticket(TicketStatus.IN_REVIEW);
+        Ticket blocker = Ticket.builder().id(200L).status(TicketStatus.DONE).project(activeProject()).build();
+        TicketDependency dep = TicketDependency.builder().ticket(t).blockedBy(blocker).build();
+
+        when(ticketRepository.findByIdAndDeletedAtIsNull(100L)).thenReturn(Optional.of(t));
+        when(ticketDependencyRepository.findByTicketId(100L)).thenReturn(List.of(dep));
+        when(ticketRepository.save(any())).thenReturn(t);
+        when(userRepository.findByUsername("admin")).thenReturn(Optional.of(admin()));
+
+        UpdateTicketRequest req = new UpdateTicketRequest();
+        req.setStatus(TicketStatus.DONE);
+
+        ticketService.updateTicket(100L, req, "admin");
+
+        assertThat(t.getStatus()).isEqualTo(TicketStatus.DONE);
+    }
+
+    @Test
+    void updateTicket_toDONE_withUnresolvedBlocker_throwsValidationException() {
+        Ticket t = ticket(TicketStatus.IN_REVIEW);
+        Ticket blocker = Ticket.builder().id(200L).status(TicketStatus.IN_PROGRESS).project(activeProject()).build();
+        TicketDependency dep = TicketDependency.builder().ticket(t).blockedBy(blocker).build();
+
+        when(ticketRepository.findByIdAndDeletedAtIsNull(100L)).thenReturn(Optional.of(t));
+        when(ticketDependencyRepository.findByTicketId(100L)).thenReturn(List.of(dep));
+
+        UpdateTicketRequest req = new UpdateTicketRequest();
+        req.setStatus(TicketStatus.DONE);
+
+        assertThatThrownBy(() -> ticketService.updateTicket(100L, req, "admin"))
+                .isInstanceOf(ValidationException.class)
+                .hasMessageContaining("unresolved blockers");
 
         verify(ticketRepository, never()).save(any());
     }

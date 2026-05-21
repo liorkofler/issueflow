@@ -10,6 +10,7 @@ import com.att.tdp.issueflow.exception.ForbiddenException;
 import com.att.tdp.issueflow.exception.ResourceNotFoundException;
 import com.att.tdp.issueflow.exception.ValidationException;
 import com.att.tdp.issueflow.repository.ProjectRepository;
+import com.att.tdp.issueflow.repository.TicketDependencyRepository;
 import com.att.tdp.issueflow.repository.TicketRepository;
 import com.att.tdp.issueflow.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -31,6 +32,7 @@ public class TicketService {
     private final ProjectRepository projectRepository;
     private final UserRepository userRepository;
     private final AuditService auditService;
+    private final TicketDependencyRepository ticketDependencyRepository;
 
     @Transactional
     public TicketResponse createTicket(CreateTicketRequest request, String currentUsername) {
@@ -98,6 +100,13 @@ public class TicketService {
 
         if (request.getStatus() != null && request.getStatus() != ticket.getStatus()) {
             validateStatusTransition(ticket.getStatus(), request.getStatus());
+            if (request.getStatus() == TicketStatus.DONE) {
+                boolean hasUnresolvedBlockers = ticketDependencyRepository.findByTicketId(ticketId).stream()
+                        .anyMatch(dep -> dep.getBlockedBy().getStatus() != TicketStatus.DONE);
+                if (hasUnresolvedBlockers) {
+                    throw new ValidationException("Cannot close ticket with unresolved blockers");
+                }
+            }
             ticket.setStatus(request.getStatus());
         }
 
