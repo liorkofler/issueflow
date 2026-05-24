@@ -1,3 +1,6 @@
+/Users/liorsfolder/issueflow_AT&T/issueflow/src/test/java/com/att/tdp/issueflow/integration/AuthFlowIntegrationTest.java
+/Users/liorsfolder/issueflow_AT&T/issueflow/src/test/java/com/att/tdp/issueflow/integration/ProjectSoftDeleteIntegrationTest.java
+/Users/liorsfolder/issueflow_AT&T/issueflow/src/test/java/com/att/tdp/issueflow/integration/TicketLifecycleIntegrationTest.java
 /Users/liorsfolder/issueflow_AT&T/issueflow/src/test/java/com/att/tdp/issueflow/scheduler/EscalationSchedulerTest.java
 /Users/liorsfolder/issueflow_AT&T/issueflow/src/test/java/com/att/tdp/issueflow/service/CommentServiceTest.java
 /Users/liorsfolder/issueflow_AT&T/issueflow/src/test/java/com/att/tdp/issueflow/service/ProjectServiceTest.java

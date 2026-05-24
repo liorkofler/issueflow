@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.att.tdp.issueflow.integration.ProjectSoftDeleteIntegrationTest
+-------------------------------------------------------------------------------
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.279 s -- in com.att.tdp.issueflow.integration.ProjectSoftDeleteIntegrationTest
