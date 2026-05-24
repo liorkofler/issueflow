@@ -1,9 +1,0 @@
-com/att/tdp/issueflow/service/TicketDependencyServiceTest.class
-com/att/tdp/issueflow/service/ProjectServiceTest.class
-com/att/tdp/issueflow/service/CommentServiceTest.class
-com/att/tdp/issueflow/integration/TicketLifecycleIntegrationTest.class
-com/att/tdp/issueflow/integration/AuthFlowIntegrationTest.class
-com/att/tdp/issueflow/service/TicketServiceTest.class
-com/att/tdp/issueflow/service/UserServiceTest.class
-com/att/tdp/issueflow/scheduler/EscalationSchedulerTest.class
-com/att/tdp/issueflow/integration/ProjectSoftDeleteIntegrationTest.class
