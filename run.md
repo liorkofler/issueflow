@@ -81,7 +81,7 @@ curl -s -X POST http://localhost:8080/users \
 TOKEN=$(curl -s -X POST http://localhost:8080/auth/login \
   -H "Content-Type: application/json" \
   -d '{"username":"alice","password":"secret123"}' \
-  | jq -r '.token')
+  | jq -r '.accessToken')
 
 echo "Token: $TOKEN"
 ```
